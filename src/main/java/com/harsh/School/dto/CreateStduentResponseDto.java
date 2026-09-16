@@ -19,16 +19,16 @@ public class CreateStduentResponseDto {
     private String email;
     private String message;
     private String subject;
-    private LocalDateTime CreatedAt;
-    private LocalDateTime updatedAt;
+  //  private LocalDateTime CreatedAt;
+   // private LocalDateTime updatedAt;
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+//    public LocalDateTime getUpdatedAt() {
+//        return updatedAt;
+//    }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+//    public void setUpdatedAt(LocalDateTime updatedAt) {
+//        this.updatedAt = updatedAt;
+//    }
 
     public String getMessage() {
         return message;
@@ -38,13 +38,13 @@ public class CreateStduentResponseDto {
         this.message = message;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return CreatedAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        CreatedAt = createdAt;
-    }
+//    public LocalDateTime getCreatedAt() {
+//        return CreatedAt;
+//    }
+//
+//    public void setCreatedAt(LocalDateTime createdAt) {
+//        CreatedAt = createdAt;
+//    }
 
     public LocalDateTime getUpdatedTime() {
         return updatedTime;

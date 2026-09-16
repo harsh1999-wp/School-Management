@@ -20,24 +20,24 @@ public class Student {
     private String email;
     private String subject;
     private boolean deleted;
-    private LocalDateTime currentTime;
-    private LocalDateTime updatedAt;
+//    private LocalDateTime currentTime;
+//    private LocalDateTime updatedAt;
 
-    public LocalDateTime getCurrentTime() {
-        return currentTime;
-    }
-
-    public void setCurrentTime(LocalDateTime currentTime) {
-        this.currentTime = currentTime;
-    }
-
-    public LocalDateTime getUpdatedAt(LocalDateTime now) {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+//    public LocalDateTime getCurrentTime() {
+//        return currentTime;
+//    }
+//
+//    public void setCurrentTime(LocalDateTime currentTime) {
+//        this.currentTime = currentTime;
+//    }
+//
+//    public LocalDateTime getUpdatedAt(LocalDateTime now) {
+//        return updatedAt;
+//    }
+//
+//    public void setUpdatedAt(LocalDateTime updatedAt) {
+//        this.updatedAt = updatedAt;
+//    }
 
     public String getName() {
         return name;
