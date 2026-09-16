@@ -11,12 +11,8 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends JpaRepository<Student , Long> {
 
-    Optional<Student> findByIdAnddeletedIsFalse(Long id);
+   Optional<Student> findByIdAndDeletedIsFalse(Long id);
 
-    List<Student> findAllDeletedIsFalse();
+   List<Student> findByDeletedIsFalse();
 
-    Optional<Student> findByIdAnddeletedISFalse(Long id);
-
-
-    // find by + "fieldname" + condition
 }

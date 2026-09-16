@@ -1,43 +1,60 @@
-package com.harsh.School.entity;
+package com.harsh.School.dto;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
 
-@Entity
-public class Student {
-
+public class CreateStduentResponseDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private long id; //Primary key
+    private long id;
+
+
 
     private String name;
     private int rollno;
     private String address;
     private String email;
+    private String message;
     private String subject;
-    private boolean deleted;
-    private LocalDateTime currentTime;
+    private LocalDateTime CreatedAt;
     private LocalDateTime updatedAt;
 
-    public LocalDateTime getCurrentTime() {
-        return currentTime;
-    }
-
-    public void setCurrentTime(LocalDateTime currentTime) {
-        this.currentTime = currentTime;
-    }
-
-    public LocalDateTime getUpdatedAt(LocalDateTime now) {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(LocalDateTime updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    private LocalDateTime updatedTime;
 
     public String getName() {
         return name;
@@ -78,15 +95,6 @@ public class Student {
     public void setSubject(String subject) {
         this.subject = subject;
     }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
     public long getId() {
         return id;
     }
@@ -95,3 +103,4 @@ public class Student {
         this.id = id;
     }
 }
+

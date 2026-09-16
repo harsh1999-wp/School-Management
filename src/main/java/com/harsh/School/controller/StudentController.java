@@ -1,5 +1,7 @@
 package com.harsh.School.controller;
 
+import com.harsh.School.dto.CreateStduentResponseDto;
+import com.harsh.School.dto.CreateStudentRequestDto;
 import com.harsh.School.entity.Student;
 import com.harsh.School.service.StudentService;
 import jakarta.persistence.Id;
@@ -22,21 +24,17 @@ public class StudentController {
 
     //create Student
     @PostMapping("/create")
-    public ResponseEntity<Student> createStudent(@RequestBody Student student){
-        System.out.println(student.getName());
-        System.out.println(student.getRollno());
-        System.out.println("Inside Student Controller");
-        Student createdStudent = studentService.createStudent(student);
-        System.out.println("Exiting Student Service");
+    public ResponseEntity<CreateStduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto){
+
+        CreateStduentResponseDto createdStudent = studentService.createStudent(studentRequestDto);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
-
-
     }
 
     //read Student
     @GetMapping("/get/{id}")
-    public  ResponseEntity<Student> getStudent(@PathVariable Long id){
-        Student studentResp = studentService.getStudent(id);
+    public  ResponseEntity<CreateStduentResponseDto> getStudent(@PathVariable Long id){
+        CreateStduentResponseDto  studentResp = studentService.getStudent(id);
 
         if(studentResp == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -47,14 +45,14 @@ public class StudentController {
 
     //GetAlldetails
     @GetMapping("/get/all")
-    public  ResponseEntity<List<Student>> getallStudnet(){
-        List<Student> studentResp = studentService.getallStudent();
+    public  ResponseEntity<List<CreateStduentResponseDto>> getAllStudent(){
+        List<CreateStduentResponseDto> studentList = studentService.getAllStudent();
 
-        if(studentResp == null){
+        if(studentList == null){
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(studentResp);
+        return ResponseEntity.ok(studentList);
     }
 
     //update Student
@@ -88,6 +86,7 @@ public class StudentController {
         }
         return  ResponseEntity.ok("Record Deleted Softly");
     }
+
 
 
 
