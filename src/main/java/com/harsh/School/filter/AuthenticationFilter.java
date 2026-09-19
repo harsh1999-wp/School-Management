@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
+//@Component
 public class AuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -15,10 +15,16 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-        String token = httpRequest.getHeader("Token");
+        String token = httpRequest.getHeader("token");
 
-        if(token == null || !token.equals("12345")){
+        if(token == null || !token.equals("1235")){
             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            httpResponse.setContentType("application/json");
+            httpResponse.getWriter().write(
+                    "{/n" +
+                            "\"message \" :\"Authentication Required\"\n" +
+                    "}"
+            );
             return;
         }
 

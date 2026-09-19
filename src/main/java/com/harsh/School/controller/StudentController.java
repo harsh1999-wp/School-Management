@@ -4,12 +4,10 @@ import com.harsh.School.dto.CreateStduentResponseDto;
 import com.harsh.School.dto.CreateStudentRequestDto;
 import com.harsh.School.entity.Student;
 import com.harsh.School.service.StudentService;
-import jakarta.persistence.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
@@ -17,7 +15,7 @@ import java.util.List;
 public class StudentController {
 
     private StudentService studentService;
-
+    //doing AutoWiring here
     public StudentController(StudentService studentService){
         this.studentService = studentService;
     }
