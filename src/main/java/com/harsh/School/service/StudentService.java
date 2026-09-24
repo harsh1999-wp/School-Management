@@ -1,17 +1,14 @@
 package com.harsh.School.service;
 
+import com.harsh.School.annotation.TimeTrack;
 import com.harsh.School.dto.CreateStduentResponseDto;
 import com.harsh.School.dto.CreateStudentRequestDto;
 import com.harsh.School.entity.Student;
 import com.harsh.School.exception.DuplicateResourceException;
 import com.harsh.School.exception.ResourceNotFoundException;
 import com.harsh.School.repository.StudentRepository;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -45,8 +42,15 @@ public class StudentService {
     }
 
     //Get all the student details
-
+    @TimeTrack(warnAfter = 10,
+               operation = "Getting all Student")
     public List<CreateStduentResponseDto> getAllStudent(){
+
+        try{
+            Thread.sleep(2000);
+        }catch (Exception e){
+
+        }
 
         List<Student> studentList = studentRepository.findByDeletedIsFalse();
 
