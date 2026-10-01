@@ -3,10 +3,13 @@ package com.harsh.School.service;
 import com.harsh.School.annotation.TimeTrack;
 import com.harsh.School.dto.CreateStduentResponseDto;
 import com.harsh.School.dto.CreateStudentRequestDto;
+import com.harsh.School.entity.Department;
 import com.harsh.School.entity.Student;
 import com.harsh.School.exception.DuplicateResourceException;
 import com.harsh.School.exception.ResourceNotFoundException;
+import com.harsh.School.repository.DepartmentRepository;
 import com.harsh.School.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -15,15 +18,29 @@ import java.util.List;
 public class StudentService {
 
     private StudentRepository studentRepository;
+    private DepartmentRepository departmentRepository;
 
-    public StudentService(StudentRepository studentRepository){
+    public StudentService(StudentRepository studentRepository,
+                          DepartmentRepository departmentRepository){
         this.studentRepository = studentRepository;
+        this.departmentRepository = departmentRepository;
 
     }
 
-    public CreateStduentResponseDto createStudent(CreateStudentRequestDto studentReqDto){
-        Student student = maptoEntity(studentReqDto);
+    //Creating Student with id
+    @Transactional
+    public CreateStduentResponseDto createStudent(CreateStudentRequestDto studentReqDto ,
+                                                  Long Id){
 
+        //getting id for department
+        Department department = departmentRepository.getDepartmentById(Id);
+
+        Student student = maptoEntity(studentReqDto, department);
+
+        //how ?
+        student.setDepartment(department);
+
+        //Exception handling
         if(emailExist(student)){
             throw new DuplicateResourceException("Student with this " +student.getEmail() +" already Exist");
         }
@@ -33,6 +50,34 @@ public class StudentService {
         return mapToDto(studentResp);
     }
 
+    //Creating Student with deptname
+    @Transactional
+    public CreateStduentResponseDto createStudent(CreateStudentRequestDto studentReqDto ,
+                                                   String name){
+
+        Department department = new Department();
+
+        //getting id for department
+        department.setName(name);
+
+        departmentRepository.save(department);
+
+        Student student = maptoEntity(studentReqDto, department);
+
+        //how ?
+        student.setDepartment(department);
+
+        //Exception handling
+        if(emailExist(student)){
+            throw new DuplicateResourceException("Student with this " +student.getEmail() +" already Exist");
+        }
+
+        Student studentResp = studentRepository.save(student);
+
+        return mapToDto(studentResp);
+    }
+
+    //getting single student
     public  CreateStduentResponseDto getStudent(Long id){
 
         Student studentResp = studentRepository.findById(id).orElseThrow(
@@ -102,14 +147,17 @@ public class StudentService {
 
     }
 
-    public Student maptoEntity(CreateStudentRequestDto studentReqDto){
+    public Student maptoEntity(CreateStudentRequestDto studentReqDto, Department department){
 
         Student student = new Student();
+        Department dep = new Department();
 
         student.setName(studentReqDto.getName());
         student.setAddress(studentReqDto.getAddress());
         student.setSubject(studentReqDto.getSubject());
         student.setEmail(studentReqDto.getEmail());
+        dep.setId(dep.getId());
+
        // student.setCurrentTime(LocalDateTime.now());
         //student.getUpdatedAt(LocalDateTime.now());
 

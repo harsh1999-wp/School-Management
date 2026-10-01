@@ -1,6 +1,9 @@
 package com.harsh.School.repository;
 
 import com.harsh.School.entity.Student;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PrePersist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;

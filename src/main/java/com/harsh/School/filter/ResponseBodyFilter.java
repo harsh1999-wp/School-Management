@@ -8,7 +8,7 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
 
-@Component
+//@Component
 public class ResponseBodyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request,

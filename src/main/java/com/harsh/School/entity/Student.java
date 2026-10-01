@@ -1,11 +1,5 @@
 package com.harsh.School.entity;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Entity
 public class Student {
@@ -13,31 +7,53 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private long id; //Primary key
+    @Column(
+        nullable = false,
+        length = 123
+
+
+    )
 
     private String name;
-    private int rollno;
-    private String address;
-    private String email;
-    private String subject;
-    private boolean deleted;
-//    private LocalDateTime currentTime;
-//    private LocalDateTime updatedAt;
 
-//    public LocalDateTime getCurrentTime() {
-//        return currentTime;
-//    }
-//
-//    public void setCurrentTime(LocalDateTime currentTime) {
-//        this.currentTime = currentTime;
-//    }
-//
-//    public LocalDateTime getUpdatedAt(LocalDateTime now) {
-//        return updatedAt;
-//    }
-//
-//    public void setUpdatedAt(LocalDateTime updatedAt) {
-//        this.updatedAt = updatedAt;
-//    }
+    @Column(precision = 3 ,scale = 0)
+    private int rollno;
+
+    @Lob
+    private String address;
+
+    private String email;
+
+    private String subject;
+
+    @Convert(converter = BooleanToStringConverter.class)
+    private boolean deleted;
+
+    @ManyToOne
+    @JoinColumn(name = "dept_id")
+    private Department department;
+
+    public Student(Department department) {
+        this.department = department;
+    }
+
+    public Student() {
+
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+
+
+
+
+
 
     public String getName() {
         return name;
@@ -95,3 +111,53 @@ public class Student {
         this.id = id;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    private LocalDateTime currentTime;
+//    private LocalDateTime updatedAt;
+
+//    public LocalDateTime getCurrentTime() {
+//        return currentTime;
+//    }
+//
+//    public void setCurrentTime(LocalDateTime currentTime) {
+//        this.currentTime = currentTime;
+//    }
+//
+//    public LocalDateTime getUpdatedAt(LocalDateTime now) {
+//        return updatedAt;
+//    }
+//
+//    public void setUpdatedAt(LocalDateTime updatedAt) {
+//        this.updatedAt = updatedAt;
+//    }

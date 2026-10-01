@@ -2,6 +2,7 @@ package com.harsh.School.controller;
 
 import com.harsh.School.dto.CreateStduentResponseDto;
 import com.harsh.School.dto.CreateStudentRequestDto;
+import com.harsh.School.entity.Department;
 import com.harsh.School.entity.Student;
 import com.harsh.School.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -20,14 +21,25 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    //create Student
-    @PostMapping
-    public ResponseEntity<CreateStduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto){
+    //create Student using id
+    @PostMapping("/{Id}")
+    public ResponseEntity<CreateStduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto, @PathVariable Long Id){
 
-        CreateStduentResponseDto createdStudent = studentService.createStudent(studentRequestDto);
+        CreateStduentResponseDto createdStudent = studentService.createStudent(studentRequestDto , Id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
     }
+
+    //Create student by department
+    @PostMapping("/withdept")
+    public ResponseEntity<CreateStduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto,
+                                                                  @RequestParam String deptname){
+
+        CreateStduentResponseDto createdStudent = studentService.createStudent(studentRequestDto , deptname);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
+    }
+
 
     //read Student
     @GetMapping("/{id}")
@@ -41,7 +53,7 @@ public class StudentController {
         return ResponseEntity.ok(studentResp);
     }
 
-    //GetAlldetails
+    //GetAll details
     @GetMapping
     public  ResponseEntity<List<CreateStduentResponseDto>> getAllStudent(){
         List<CreateStduentResponseDto> studentList = studentService.getAllStudent();
@@ -63,6 +75,8 @@ public class StudentController {
 //        }
         return  ResponseEntity.ok(studreq);
     }
+
+
     //delete Student
     @DeleteMapping("/{id}")
     public  ResponseEntity<String> deleteStudent(@PathVariable Long id){
@@ -74,6 +88,8 @@ public class StudentController {
 //        }
         return  ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+
 // soft delete
     @PatchMapping("/soft-delete/{id}")
     public ResponseEntity<String> softDeleteStudent(@PathVariable Long id){
