@@ -19,4 +19,5 @@ public class DepartmentRepository  {
     public  Department getDepartmentById(Long Id){
         return entityManager.find(Department.class , Id);
     }
+
 }

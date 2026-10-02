@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,8 +20,14 @@ import lombok.Setter;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private  Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY )// auto unqiue id
+    @Column(name = "id")
+    private  Long dept_id;
 
     private String name;
+
+    @OneToMany(mappedBy = "department",
+                cascade = CascadeType.ALL,
+                fetch = FetchType.LAZY)
+    private List<Student> students = new ArrayList<>();
 }

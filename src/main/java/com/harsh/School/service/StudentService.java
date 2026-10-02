@@ -1,7 +1,7 @@
 package com.harsh.School.service;
 
 import com.harsh.School.annotation.TimeTrack;
-import com.harsh.School.dto.CreateStduentResponseDto;
+import com.harsh.School.dto.CreateStuduentResponseDto;
 import com.harsh.School.dto.CreateStudentRequestDto;
 import com.harsh.School.entity.Department;
 import com.harsh.School.entity.Student;
@@ -10,6 +10,7 @@ import com.harsh.School.exception.ResourceNotFoundException;
 import com.harsh.School.repository.DepartmentRepository;
 import com.harsh.School.repository.StudentRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class StudentService {
 
     //Creating Student with id
     @Transactional
-    public CreateStduentResponseDto createStudent(CreateStudentRequestDto studentReqDto ,
-                                                  Long Id){
+    public CreateStuduentResponseDto createStudent(CreateStudentRequestDto studentReqDto ,
+                                                   Long Id){
 
         //getting id for department
         Department department = departmentRepository.getDepartmentById(Id);
@@ -52,7 +53,7 @@ public class StudentService {
 
     //Creating Student with deptname
     @Transactional
-    public CreateStduentResponseDto createStudent(CreateStudentRequestDto studentReqDto ,
+    public CreateStuduentResponseDto createStudent(CreateStudentRequestDto studentReqDto ,
                                                    String name){
 
         Department department = new Department();
@@ -78,7 +79,8 @@ public class StudentService {
     }
 
     //getting single student
-    public  CreateStduentResponseDto getStudent(Long id){
+    @EntityGraph(attributePaths = {"department", "name"})
+    public CreateStuduentResponseDto getStudent(Long id){
 
         Student studentResp = studentRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Student with id " + id +" not found"));
@@ -89,7 +91,7 @@ public class StudentService {
     //Get all the student details
     @TimeTrack(warnAfter = 10,
                operation = "Getting all Student")
-    public List<CreateStduentResponseDto> getAllStudent(){
+    public List<CreateStuduentResponseDto> getAllStudent(){
 
         try{
             Thread.sleep(2000);
@@ -156,7 +158,7 @@ public class StudentService {
         student.setAddress(studentReqDto.getAddress());
         student.setSubject(studentReqDto.getSubject());
         student.setEmail(studentReqDto.getEmail());
-        dep.setId(dep.getId());
+        dep.setDept_id(dep.getDept_id());
 
        // student.setCurrentTime(LocalDateTime.now());
         //student.getUpdatedAt(LocalDateTime.now());
@@ -166,9 +168,9 @@ public class StudentService {
         return student;
     }
 
-    public CreateStduentResponseDto mapToDto(Student student){
+    public CreateStuduentResponseDto mapToDto(Student student){
 
-        CreateStduentResponseDto studentResDto = new CreateStduentResponseDto();
+        CreateStuduentResponseDto studentResDto = new CreateStuduentResponseDto();
 
         studentResDto.setName(student.getName());
         studentResDto.setId(student.getId());

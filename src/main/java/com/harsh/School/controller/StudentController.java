@@ -1,8 +1,7 @@
 package com.harsh.School.controller;
 
-import com.harsh.School.dto.CreateStduentResponseDto;
+import com.harsh.School.dto.CreateStuduentResponseDto;
 import com.harsh.School.dto.CreateStudentRequestDto;
-import com.harsh.School.entity.Department;
 import com.harsh.School.entity.Student;
 import com.harsh.School.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -23,19 +22,19 @@ public class StudentController {
 
     //create Student using id
     @PostMapping("/{Id}")
-    public ResponseEntity<CreateStduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto, @PathVariable Long Id){
+    public ResponseEntity<CreateStuduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto, @PathVariable Long Id){
 
-        CreateStduentResponseDto createdStudent = studentService.createStudent(studentRequestDto , Id);
+        CreateStuduentResponseDto createdStudent = studentService.createStudent(studentRequestDto , Id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
     }
 
     //Create student by department
     @PostMapping("/withdept")
-    public ResponseEntity<CreateStduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto,
-                                                                  @RequestParam String deptname){
+    public ResponseEntity<CreateStuduentResponseDto> createStudent(@RequestBody CreateStudentRequestDto studentRequestDto,
+                                                                   @RequestParam String deptname){
 
-        CreateStduentResponseDto createdStudent = studentService.createStudent(studentRequestDto , deptname);
+        CreateStuduentResponseDto createdStudent = studentService.createStudent(studentRequestDto , deptname);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
     }
@@ -43,8 +42,8 @@ public class StudentController {
 
     //read Student
     @GetMapping("/{id}")
-    public  ResponseEntity<CreateStduentResponseDto> getStudent(@PathVariable Long id){
-        CreateStduentResponseDto  studentResp = studentService.getStudent(id);
+    public  ResponseEntity<CreateStuduentResponseDto> getStudent(@PathVariable Long id){
+        CreateStuduentResponseDto studentResp = studentService.getStudent(id);
 
         if(studentResp == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -55,8 +54,8 @@ public class StudentController {
 
     //GetAll details
     @GetMapping
-    public  ResponseEntity<List<CreateStduentResponseDto>> getAllStudent(){
-        List<CreateStduentResponseDto> studentList = studentService.getAllStudent();
+    public  ResponseEntity<List<CreateStuduentResponseDto>> getAllStudent(){
+        List<CreateStuduentResponseDto> studentList = studentService.getAllStudent();
 
 //        if(studentList == null){
 //            return ResponseEntity.notFound().build();
@@ -99,5 +98,7 @@ public class StudentController {
 //            return  ResponseEntity.notFound().build();
 //        }
         return  ResponseEntity.noContent().build();
+
+
     }
 }

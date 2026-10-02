@@ -23,6 +23,7 @@ public class LoggingOffTime {
             return joinPoint.proceed();
         }
         finally {
+
             long endTime = System.currentTimeMillis();
             long duration = startTime - endTime;
 

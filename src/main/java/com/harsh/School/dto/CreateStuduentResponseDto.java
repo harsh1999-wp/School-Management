@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
 
-public class CreateStduentResponseDto {
+public class CreateStuduentResponseDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private long id;

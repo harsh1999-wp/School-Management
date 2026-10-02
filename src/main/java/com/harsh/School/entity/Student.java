@@ -7,13 +7,11 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private long id; //Primary key
+
     @Column(
         nullable = false,
         length = 123
-
-
     )
-
     private String name;
 
     @Column(precision = 3 ,scale = 0)
@@ -29,8 +27,8 @@ public class Student {
     @Convert(converter = BooleanToStringConverter.class)
     private boolean deleted;
 
-    @ManyToOne
-    @JoinColumn(name = "dept_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dept_id") //auto mapped
     private Department department;
 
     public Student(Department department) {
