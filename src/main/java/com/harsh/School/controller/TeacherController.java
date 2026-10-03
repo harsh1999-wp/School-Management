@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping({"/api/teacher"})
 public class TeacherController {
 
     private TeacherService teacherService;
@@ -19,10 +19,10 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @PostMapping
+    @PostMapping({"/name"})
     ResponseEntity<Teacher> createTeacher(@RequestBody Teacher teacher){
 
-        //Teacher createTeacher = new TeacherService.createTeacher();
+        Teacher t1 = new TeacherService.createTeacher(teacher);
 
         return null;
     }

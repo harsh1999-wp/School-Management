@@ -30,4 +30,9 @@ public class Department {
                 cascade = CascadeType.ALL,
                 fetch = FetchType.LAZY)
     private List<Student> students = new ArrayList<>();
+
+    @OneToOne(mappedBy = "department" ,
+                cascade = CascadeType.REMOVE,
+                fetch = FetchType.LAZY)
+    private List<Teacher> teachers = new ArrayList<>();
 }

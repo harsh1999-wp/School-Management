@@ -1,7 +1,11 @@
 package com.harsh.School.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
+@Entity
 public class Teacher {
 
     @Id
@@ -10,6 +14,17 @@ public class Teacher {
     private int age;
     private String Education;
 
+    @OneToOne()
+    @JoinColumn(name = "dept_id")
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public Long getEmpId() {
         return empId;
