@@ -12,7 +12,25 @@ public class Teacher {
     private Long empId;
     private String name;
     private int age;
-    private String Education;
+    private String education;
+    private int salary;
+    private int noofstudent;
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public int getNoofstudent() {
+        return noofstudent;
+    }
+
+    public void setNoofstudent(int noofstudent) {
+        this.noofstudent = noofstudent;
+    }
 
     @OneToOne()
     @JoinColumn(name = "dept_id")
@@ -50,13 +68,7 @@ public class Teacher {
         this.age = age;
     }
 
-    public String getEducation() {
-        return Education;
-    }
 
-    public void setEducation(String education) {
-        Education = education;
-    }
 
     public int getSalary() {
         return salary;
@@ -66,5 +78,5 @@ public class Teacher {
         this.salary = salary;
     }
 
-    private int salary;
+
 }
